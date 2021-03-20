@@ -6,6 +6,8 @@ const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
 
+const project = document.querySelector('#project');
+
 const brandings = filterType(allWorks, 'B');
 const graphics = filterType(allWorks, 'G');
 const motions = filterType(allWorks, 'M');
@@ -15,7 +17,7 @@ const illustrations = filterType(allWorks, 'I');
 
 
 // Main Load
-window.addEventListener('DOMContentLoaded', contentsLoader(allWorks));
+window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(allWorks) } });
 
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
@@ -67,14 +69,21 @@ toggleBtn.addEventListener('click', () => {
 //     }
 // })
 
-//Link to pages
-container.addEventListener('click', (e) => {
-    const thumbDiv = e.target.parentNode;
-    const itemDiv = thumbDiv.parentNode;
-    let dataNum = itemDiv.dataset.number;
-    location.href = `http://www.toastedpage.com/${dataNum}`;
-})
 
+//Link to pages
+sender();  //for item pages
+function sender() {
+    if (!container) { return; }
+    container.addEventListener('click', (e) => {
+        const thumbDiv = e.target.parentNode;
+        const itemDiv = thumbDiv.parentNode;
+        const dataNum = itemDiv.dataset.number;
+        console.log(dataNum);
+        location.href = `${dataNum}.html`; //change later!
+        //js here or direct in the page?
+        projectLoader(dataNum);
+    })
+}
 //functions
 function contentsLoader(worksArray) {
     container.innerHTML = '';
