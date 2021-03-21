@@ -2,26 +2,33 @@
 
 import { allWorks } from './allWorksList.js';
 
-
 const project = document.querySelector('#project');
 
 
 //console.log(window.location.href);
 console.log(window.location.pathname);
 const projectIndex = window.location.pathname.substr(1, 6);
-console.log(projectIndex);
+const strToNum = parseInt(projectIndex);
+const index = allWorks.findIndex(el => el.number === strToNum);
 
-window.projectLoader = projectLoader;
+if (project) {
+    projectLoader(index);
+    projectImgLoader(index);
+}
+
+
+
+
 function projectLoader(num) {
-    const strToNum = parseInt(num);
-    const index = allWorks.findIndex(el => el.number === strToNum); //이게 일단 안됨.
+    // const strToNum = parseInt(num);
+    // const index = allWorks.findIndex(el => el.number === strToNum);
     console.log(index);
     project.innerHTML = `
     <div class="project__text">
     <div class="project__text__title">
         <h1 class="en">${allWorks[index].en}</h1>
         <h1 class="ko">${allWorks[index].ko}</h1>
-        <h4>Motion, Illustration</h4>
+        <h4>${allWorks[index].type}</h4>
     </div>
 
     <div class="project__text__description">
@@ -37,18 +44,46 @@ function projectLoader(num) {
         </div>
     </div>
 </div>
-<div class="project__images">
-    <div class="project__image max-width--1"><img src="imgs/sample/1440.jpg" alt=""></div>
-    <div class="project__image text-width--1"><img src="imgs/sample/1440.jpg" alt=""></div>
-    <div class="project__image max-width--2">
-        <img src="imgs/sample/1440.jpg" alt=""><img src="imgs/sample/1440.jpg" alt="">
-    </div>
-    <div class="project__images text-width--2"><img src="imgs/sample/1440.jpg" alt=""><img
-            src="imgs/sample/1440.jpg" alt=""></div>
-</div>
     `
+
 }
 
-if (project) {
-    projectLoader(projectIndex);
+function projectImgLoader(num) {
+    const imgs = allWorks[num].imgs;
+    const imgContainer = document.createElement('div');
+    imgContainer.setAttribute('class', 'project__images');
+    project.appendChild(imgContainer);
+
+    for (let i = 0; i < imgs.length; i++) {
+        const imgDiv = document.createElement('div'); //must be inside of 'for'
+        const img = document.createElement('img');
+        const imgWidth = imgs[i].substr(3, 3);
+
+        imgDiv.setAttribute('class', `${imgWidth} project__image`);
+        img.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i]}`)
+        imgDiv.appendChild(img);
+        imgContainer.appendChild(imgDiv);
+
+        switch (imgWidth) {
+            case 'mw1':
+                break;
+            case 'tw1':
+                break;
+            case 'mw2':
+                const secondMw = document.createElement('img');
+                secondMw.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i + 1]}`)
+                imgDiv.appendChild(secondMw);
+                i++;
+                break;
+            case 'tw2':
+                const secondTw = document.createElement('img');
+                secondTw.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i + 1]}`)
+                imgDiv.appendChild(secondTw);
+                i++;
+                break;
+        }
+        console.log(i);
+    }
+
 }
+

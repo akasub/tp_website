@@ -1,6 +1,6 @@
-:root{
+/* :root{
 
-}
+} */
 *{
     box-sizing: border-box;
 }
@@ -186,15 +186,15 @@ p.ko.etc{
 .project__image{
     margin: auto;
 }
-.text-width--1, .text-width--2{
+.tw1, .tw2{
     max-width: 1000px;
 }
-.max-width--2{
+.mw2{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
-.text-width--2{
+.tw2{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
@@ -247,7 +247,7 @@ p.ko.etc{
     .project__text__description{
         display: block;
     }
-    .max-width--2{
+    .mw2{
         display: block;
     }
 }

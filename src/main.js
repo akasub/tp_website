@@ -6,8 +6,6 @@ const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
 
-const project = document.querySelector('#project');
-
 const brandings = filterType(allWorks, 'B');
 const graphics = filterType(allWorks, 'G');
 const motions = filterType(allWorks, 'M');
@@ -48,6 +46,9 @@ navbarTypes.addEventListener('click', (e) => {
     }
 })
 
+//refresh ->shoule find something else
+//document.querySelector('.navbar__title').addEventListener('click', () => location.href = '/');
+
 //Hamburger
 const toggleBtn = document.querySelector('.toggle-btn');
 let opened = false;
@@ -78,9 +79,9 @@ function sender() {
         const thumbDiv = e.target.parentNode;
         const itemDiv = thumbDiv.parentNode;
         const dataNum = itemDiv.dataset.number;
+        if (!dataNum) { return; }
         console.log(dataNum);
         location.href = `${dataNum}.html`; //change later!
-        //js here or direct in the page?
         projectLoader(dataNum);
     })
 }
