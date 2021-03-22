@@ -1,21 +1,13 @@
 'use strict';
 
-import { allWorks } from './allWorksList.js';
+import { All } from './allWorksList.js';
 
 const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
 
-const brandings = filterType(allWorks, 'B');
-const graphics = filterType(allWorks, 'G');
-const motions = filterType(allWorks, 'M');
-const editorials = filterType(allWorks, 'E');
-const illustrations = filterType(allWorks, 'I');
-
-
-
 // Main Load
-window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(allWorks) } });
+window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(All) } });
 
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
@@ -24,26 +16,7 @@ navbarTypes.addEventListener('click', (e) => {
     const currentType = document.querySelector('.selected');
     unselecter(currentType);
     typeColorChanger(type);
-    switch (type) {
-        case 'A':
-            contentsLoader(allWorks);
-            break;
-        case 'B':
-            contentsLoader(brandings);
-            break;
-        case 'G':
-            contentsLoader(graphics);
-            break;
-        case 'M':
-            contentsLoader(motions);
-            break;
-        case 'E':
-            contentsLoader(editorials);
-            break;
-        case 'I':
-            contentsLoader(illustrations);
-            break;
-    }
+    contentsLoader(filterType(All, type));
 })
 
 //refresh ->shoule find something else
@@ -94,7 +67,7 @@ function contentsLoader(worksArray) {
         div.dataset.type = worksArray[i].type;
         div.innerHTML = `
         <div class="item__thumb">
-            <img src="imgs/sample/${worksArray[i].number}.png" alt="${allWorks[i].number}" class="item__thumb__img">
+            <img src="imgs/sample/${worksArray[i].number}.png" alt="${All[i].number}" class="item__thumb__img">
         </div>
         <div class="item__description">
             <div class="item__descriptrion__en">

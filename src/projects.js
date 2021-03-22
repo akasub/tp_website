@@ -1,15 +1,14 @@
 'use strict';
 
-import { allWorks } from './allWorksList.js';
+import { All } from './allWorksList.js';
 
 const project = document.querySelector('#project');
-
 
 //console.log(window.location.href);
 console.log(window.location.pathname);
 const projectIndex = window.location.pathname.substr(1, 6);
 const strToNum = parseInt(projectIndex);
-const index = allWorks.findIndex(el => el.number === strToNum);
+const index = All.findIndex(el => el.number === strToNum);
 
 if (project) {
     projectLoader(index);
@@ -17,39 +16,36 @@ if (project) {
 }
 
 
-
-
 function projectLoader(num) {
     // const strToNum = parseInt(num);
-    // const index = allWorks.findIndex(el => el.number === strToNum);
+    // const index = All.findIndex(el => el.number === strToNum);
     console.log(index);
     project.innerHTML = `
     <div class="project__text">
     <div class="project__text__title">
-        <h1 class="en">${allWorks[index].en}</h1>
-        <h1 class="ko">${allWorks[index].ko}</h1>
-        <h4>${allWorks[index].type}</h4>
+        <h1 class="en">${All[index].en}</h1>
+        <h1 class="ko">${All[index].ko}</h1>
+        <h4>${All[index].type}</h4>
     </div>
 
     <div class="project__text__description">
         <div class="text__description__en">
-            <p class="en description">${allWorks[index].enTxt}
+            <p class="en description">${All[index].enTxt}
             </p>
 
-            <p class="en etc">${allWorks[index].enEtc}</p>
+            <p class="en etc">${All[index].enEtc}</p>
         </div>
         <div class="text__description__ko">
-            <p class="ko description">${allWorks[index].koTxt}</p>
-            <p class="ko etc">${allWorks[index].koEtc}</p>
+            <p class="ko description">${All[index].koTxt}</p>
+            <p class="ko etc">${All[index].koEtc}</p>
         </div>
     </div>
 </div>
     `
-
 }
 
 function projectImgLoader(num) {
-    const imgs = allWorks[num].imgs;
+    const imgs = All[num].imgs;
     const imgContainer = document.createElement('div');
     imgContainer.setAttribute('class', 'project__images');
     project.appendChild(imgContainer);
@@ -82,8 +78,6 @@ function projectImgLoader(num) {
                 i++;
                 break;
         }
-        console.log(i);
     }
-
 }
 
