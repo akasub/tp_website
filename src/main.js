@@ -12,10 +12,12 @@ window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoa
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
-    const currentType = document.querySelector('.selected');
-    unselecter(currentType);
-    typeColorChanger(type);
-    contentsLoader(filterType(All, type));
+    if (type) {
+        const currentType = document.querySelector('.selected');
+        unselecter(currentType);
+        typeColorChanger(type);
+        contentsLoader(filterType(All, type));
+    }
 })
 
 //refresh
@@ -58,6 +60,10 @@ function sender() {
         projectLoader(dataNum);
     })
 }
+
+
+
+
 //functions
 function contentsLoader(worksArray) {
     container.innerHTML = '';
