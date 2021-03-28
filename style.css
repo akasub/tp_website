@@ -39,7 +39,7 @@ h1.ko{
     font-size: 18pt;
     line-height: 34pt;
 }
-h2{
+h2, .tail__left, .tail__right, .tail__random{
     font-family: 'Work Sans', sans-serif;
     font-weight: 500;
     font-size: 16pt;
@@ -63,6 +63,9 @@ h4{
     font-weight: 500;
     font-size: 12px;
 }
+h4.type-under-title{
+    color: tomato;
+}
 p.description.en{
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
@@ -72,8 +75,8 @@ p.description.en{
 p.description.ko{
     font-family: 'Gothic A1', sans-serif;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 18pt;
+    font-size: 14px;
+    line-height: 19pt;
 }
 p.en.etc{
     padding-top: 10px;
@@ -131,6 +134,30 @@ p.ko.etc{
     right:10px;
 }
 
+
+#tail{
+    /* background-color: yellow; */
+    margin: 40px 20px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+.tail__more{
+    padding: 0 20px;
+    display: flex;
+}
+#footer{
+    padding: 20px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    color: gray;
+}
+
+
+
 #container{
     padding: 90px 20px;
     width: calc(100vw-56)px;
@@ -140,6 +167,7 @@ p.ko.etc{
 }
 .item__thumb__img{
     border-bottom: solid 1px black;
+    object-fit: cover;
 }
 .item__thumb__img:hover{
    opacity: 50%;
@@ -153,7 +181,7 @@ p.ko.etc{
     display: flex;
     justify-content: space-between;
 }
-.typeIndex{
+.type-index{
     color: tomato;
 }
 
@@ -184,7 +212,9 @@ p.ko.etc{
 
 
 .project__image{
+    text-align: center;
     margin: auto;
+    padding-bottom: 10px;
 }
 .tw1, .tw2{
     max-width: 1000px;
@@ -192,15 +222,15 @@ p.ko.etc{
 .mw2{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    column-gap: 10px;
+    max-width: 1920px;
 }
 .tw2{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    column-gap: 10px;
     margin: auto;
 }
-
 
 
 
@@ -236,13 +266,15 @@ p.ko.etc{
         padding: 2px 0;
     }
     h3.en{
-        font-size: 14px;
+        font-size: 12px;
     }
     h3.ko{
-        font-size: 12px;
+        font-size: 10px;
         padding: 5px 0;
     }
-
+    /* .type-index{
+        display: none;
+    } */
 
     .project__text__description{
         display: block;

@@ -3,29 +3,58 @@
 import { All } from './allWorksList.js';
 
 const project = document.querySelector('#project');
+const tail = document.querySelector('#tail');
+const tailLeft = document.querySelector('.tail__left');
+const tailRight = document.querySelector('.tail__right');
 
 //console.log(window.location.href);
-console.log(window.location.pathname);
+//console.log(window.location.pathname);
 const projectIndex = window.location.pathname.substr(1, 6);
 const strToNum = parseInt(projectIndex);
 const index = All.findIndex(el => el.number === strToNum);
+
 
 if (project) {
     projectLoader(index);
     projectImgLoader(index);
 }
 
+if (index === 0) {
+    tailLeft.style.visibility = 'hidden';
+} else if (index === All.length - 1) {
+    tailRight.style.visibility = 'hidden';
+}
+
+tail.addEventListener('click', (e) => {
+    const way = e.target.parentNode.classList;
+    //console.log(index);
+
+    switch (way[0]) {
+        case 'tail__left':
+            location.href = `${All[index - 1].number}.html`;
+            break;
+        case 'tail__random':
+            const randomNum = Math.floor(Math.random() * (All.length - 1));
+            location.href = `${All[randomNum].number}.html`;
+            break;
+        case 'tail__right':
+            location.href = `${All[index + 1].number}.html`;
+            break;
+    }
+})
+
+
+
 
 function projectLoader(num) {
     // const strToNum = parseInt(num);
     // const index = All.findIndex(el => el.number === strToNum);
-    console.log(index);
     project.innerHTML = `
     <div class="project__text">
     <div class="project__text__title">
         <h1 class="en">${All[index].en}</h1>
         <h1 class="ko">${All[index].ko}</h1>
-        <h4>${All[index].type}</h4>
+        <h4 class="type-under-title">${All[index].type.join(", ")}</h4>
     </div>
 
     <div class="project__text__description">

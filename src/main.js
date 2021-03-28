@@ -12,15 +12,15 @@ window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoa
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
-    // const typeToContainer = type.replace(/'/gi, '');
     const currentType = document.querySelector('.selected');
     unselecter(currentType);
     typeColorChanger(type);
     contentsLoader(filterType(All, type));
 })
 
-//refresh ->shoule find something else
-//document.querySelector('.navbar__title').addEventListener('click', () => location.href = '/');
+//refresh
+const home = document.querySelector('.navbar__title');
+home.addEventListener('click', () => document.location.href = '/');
 
 //Hamburger
 const toggleBtn = document.querySelector('.toggle-btn');
@@ -67,12 +67,12 @@ function contentsLoader(worksArray) {
         div.dataset.type = worksArray[i].type;
         div.innerHTML = `
         <div class="item__thumb">
-            <img src="imgs/sample/${worksArray[i].number}.png" alt="${All[i].number}" class="item__thumb__img">
+            <img src="imgs/thumbs/${worksArray[i].number}.jpg" alt="${All[i].number}" class="item__thumb__img">
         </div>
         <div class="item__description">
             <div class="item__descriptrion__en">
             <h3 class="en">${worksArray[i].en}</h3>
-            <h3 class="en typeIndex">${worksArray[i].type}</h3>
+            <h3 class="en type-index">${typeAcronym(worksArray[i].type)}</h3>
             </div>
             <h3 class="ko">${worksArray[i].ko}</h3>
         </div>`
@@ -91,6 +91,12 @@ function filterType(arr, a) {
 function typeColorChanger(type) {
     const selectedType = document.querySelector(`h4[data-type="${type}"]`);
     selectedType.setAttribute('class', 'selected');
+}
+function typeAcronym(type) {
+    const shortType = type.map(function (item, index, array) {
+        return item.charAt(0);
+    })
+    return shortType.join(', ');
 }
 function unselecter(currentType) {
     currentType.removeAttribute('class', 'selected');
