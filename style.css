@@ -3,6 +3,8 @@
 } */
 *{
     box-sizing: border-box;
+    /* word-break: normal; */
+    word-break: keep-all;
 }
 ul,li{
     list-style-type: none;
@@ -50,13 +52,13 @@ h2.menu{
 h3.en{
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
-    font-size: 1.2vw;
+    font-size: 1.1vw;
 }
 h3.ko{
     font-family: 'Gothic A1', sans-serif;
     font-weight: 500;
-    font-size: 1.1vw;
-    padding-top: 0.6vw;
+    font-size: 1vw;
+    padding-top: 0.5vw;
 }
 h4{
     font-family: 'Work Sans', sans-serif;
@@ -90,7 +92,7 @@ p.ko.etc{
     padding-top: 10px;
     font-family: 'Gothic A1', sans-serif;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 16pt;
     color: gray;
 }
@@ -166,7 +168,7 @@ p.ko.etc{
     grid-gap: 10px;
 }
 .item__thumb__img{
-    border-bottom: solid 1px black;
+    /* border-bottom: solid 1px black; */
     object-fit: cover;
 }
 .item__thumb__img:hover{
@@ -175,7 +177,7 @@ p.ko.etc{
 }
 .item__description{
     height: 6vw;
-    padding: 2px 0;
+    padding: 4px 0;
 }
 .item__descriptrion__en{
     display: flex;
@@ -199,7 +201,7 @@ p.ko.etc{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     margin-bottom: 60px;
 }
@@ -217,7 +219,7 @@ p.ko.etc{
     padding-bottom: 10px;
 }
 .tw1, .tw2{
-    max-width: 1000px;
+    max-width: 1200px;
 }
 .mw2{
     display: grid;

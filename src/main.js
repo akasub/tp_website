@@ -13,10 +13,14 @@ window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoa
 navbarTypes.addEventListener('click', (e) => {
     const type = e.target.dataset.type;
     if (type) {
-        const currentType = document.querySelector('.selected');
-        unselecter(currentType);
-        typeColorChanger(type);
-        contentsLoader(filterType(All, type));
+        if (type === 'All') {
+            document.location.href = '/'
+        } else {
+            const currentType = document.querySelector('.selected');
+            unselecter(currentType);
+            typeColorChanger(type);
+            contentsLoader(filterType(All, type));
+        }
     }
 })
 
@@ -73,7 +77,7 @@ function contentsLoader(worksArray) {
         div.dataset.type = worksArray[i].type;
         div.innerHTML = `
         <div class="item__thumb">
-            <img src="imgs/thumbs/${worksArray[i].number}.jpg" alt="${All[i].number}" class="item__thumb__img">
+            <img src="imgs/thumbs/${worksArray[i].number}.${worksArray[i].thumb}" alt="${All[i].number}" class="item__thumb__img">
         </div>
         <div class="item__description">
             <div class="item__descriptrion__en">

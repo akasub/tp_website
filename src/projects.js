@@ -13,6 +13,8 @@ const projectIndex = window.location.pathname.substr(1, 6);
 const strToNum = parseInt(projectIndex);
 const index = All.findIndex(el => el.number === strToNum);
 
+const home = document.querySelector('.navbar__title');
+home.addEventListener('click', () => document.location.href = '/');
 
 if (project) {
     projectLoader(index);
@@ -52,9 +54,10 @@ function projectLoader(num) {
     project.innerHTML = `
     <div class="project__text">
     <div class="project__text__title">
+    <h4 class="type-under-title">${All[index].type.join(", ")}</h4>
         <h1 class="en">${All[index].en}</h1>
         <h1 class="ko">${All[index].ko}</h1>
-        <h4 class="type-under-title">${All[index].type.join(", ")}</h4>
+    
     </div>
 
     <div class="project__text__description">
