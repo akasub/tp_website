@@ -5,9 +5,43 @@ import { All } from './allWorksList.js';
 const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
+let earlyBirds;
+let lazyItems;
+let ioIndex;
+let rect;
+//io가 컨텐츠로더보다 위에 있어야 작동..
+const io = new IntersectionObserver((entries, observer) => {
+    for (let i = 0; i < entries.length; i++) {
+        ioIndex = entries[0].target.dataset.index * 1;
+    }
+    rect = entries[0].target.getBoundingClientRect();
+    console.log(window.innerHeight);
+    console.log(rect.top);
+    if (rect.top < window.innerHeight) {
+        const source = entries[0].target.querySelector('img').dataset.src;
+        entries[0].target.querySelector('img').setAttribute('src', source);
+
+
+        // if (earlyBirds === 12) {
+        //     for (let i = 0; i < 4; i++) {
+        //         const sameRow = itemBoxes[earlyBirds + ioIndex + i];
+        //         sameRow.querySelector('img').setAttribute('src', samerow.querySelector('img').dataset.src);
+
+        //     }
+
+    }
+});
 
 // Main Load
-window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(All) } });
+//window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(All) } });
+if (container) {
+    contentsLoader(All);
+    const itemBoxes = document.querySelectorAll('.item__box');
+    if (window.innerWidth > 768) {
+        earlyBirds = 12;
+        imgLoader(earlyBirds, itemBoxes);
+    } else { earlyBirds = 6; imgLoader(earlyBirds, itemBoxes); }
+};
 
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
@@ -67,17 +101,20 @@ function sender() {
 
 
 
-
 //functions
+
 function contentsLoader(worksArray) {
     container.innerHTML = '';
     for (let i = 0; i < worksArray.length; i++) {
         const div = document.createElement('div');
+        div.dataset.index = i;
         div.dataset.number = worksArray[i].number;
         div.dataset.type = worksArray[i].type;
+        div.classList.add('item__box');
+        div.classList.add('lazy');
         div.innerHTML = `
         <div class="item__thumb">
-            <img src="imgs/thumbs/${worksArray[i].number}.${worksArray[i].thumb}" alt="${All[i].number}" class="item__thumb__img">
+            <img src="imgs/thumbs/placeholder.jpg" data-src="imgs/thumbs/${worksArray[i].number}.${worksArray[i].thumb}" alt="${All[i].number}" class="item__thumb__img">
         </div>
         <div class="item__description">
             <div class="item__descriptrion__en">
@@ -85,10 +122,33 @@ function contentsLoader(worksArray) {
             <h3 class="en type-index">${typeAcronym(worksArray[i].type)}</h3>
             </div>
             <h3 class="ko">${worksArray[i].ko}</h3>
-        </div>`
+        </div>`;
+        //hidden, data-src add! 
         container.appendChild(div);
     }
 }
+
+
+
+function imgLoader(num, itemBox) {
+    for (let i = 0; i < num; i++) {
+        const source = itemBox[i].querySelector('img').dataset.src;
+        itemBox[i].querySelector('img').setAttribute('src', source);
+        itemBox[i].removeAttribute('class');
+        itemBox[i].classList.add('item__box');
+    }
+    lazyItems = document.querySelectorAll('.lazy');
+}
+
+window.addEventListener('scroll', () => {
+    lazyItems.forEach(el => {
+        io.observe(el);
+    });
+})
+
+
+
+
 function filterType(arr, a) {
     const newArr = [];
     for (let i in arr) {
@@ -119,3 +179,29 @@ function closeBurger() {
     navbarTypes.style.display = 'none';
     navbarMenus.style.display = 'none';
 }
+
+
+
+//Intersection Observer
+
+
+// const io = new IntersectionObserver((entries, observer) => {
+//     entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//             let lazyImage = entry.target;
+//             lazyImage.src = lazyImage.dataset.src;
+//             lazyImage.classList.remove("lazy");
+//             lazyImageObserver.unobserve(lazyImage);
+//         }
+//     });
+// const io = new IntersectionObserver((entries, observer) => {
+//     console.log(entries);
+//     entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//             let lazyImage = entry.target;
+//             lazyImage.src = lazyImage.dataset.src;
+//             lazyImage.classList.remove("lazy");
+//             lazyImageObserver.unobserve(lazyImage);
+//         }
+//     })
+// };

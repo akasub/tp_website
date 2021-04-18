@@ -164,12 +164,21 @@ p.ko.etc{
     padding: 90px 20px;
     width: calc(100vw-56)px;
     display: grid;
+    /* grid-template-columns: repeat(3, 30vw);
+    grid-template-rows: 30vw; */
+
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
 }
+.item__box{
+    transition: 0.5s;
+}
 .item__thumb__img{
     /* border-bottom: solid 1px black; */
+    /* min-height: 30vw; */
+    visibility: visible;
     object-fit: cover;
+    transition: 0.5s;
 }
 .item__thumb__img:hover{
    opacity: 50%;
@@ -185,6 +194,9 @@ p.ko.etc{
 }
 .type-index{
     color: tomato;
+}
+.hidden{
+    visibility: hidden;
 }
 
 
