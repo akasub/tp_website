@@ -7,7 +7,14 @@ const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
 
 // Main Load
-window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(All) } });
+window.addEventListener('DOMContentLoaded', () => {
+    if (container) {
+        contentsLoader(All);
+        document.querySelectorAll('.lazyload').forEach(function (el) {//lazyload란 클래스를 가진 태그를 관찰
+            io.observe(el);
+        });
+    }
+});
 
 //Type Load
 navbarTypes.addEventListener('click', (e) => {
@@ -20,6 +27,9 @@ navbarTypes.addEventListener('click', (e) => {
             unselecter(currentType);
             typeColorChanger(type);
             contentsLoader(filterType(All, type));
+            document.querySelectorAll('.lazyload').forEach(function (el) {//lazyload란 클래스를 가진 태그를 관찰
+                io.observe(el);
+            });
         }
     }
 })
@@ -65,6 +75,20 @@ function sender() {
     })
 }
 
+const options = {//얼마나 노출되었을 때 발동할지 옵션설정
+    threshold: 0
+}
+var io = new IntersectionObserver(function (entries) {//io라는 이름의 IntersectionObserver를 생성
+    entries.forEach(function (entry) {
+        if (entry.isIntersecting) {//만약 이미지를 관찰하고 있다면 
+            io.unobserve(entry.target);//이미지 관찰종료
+            entry.target.src = entry.target.dataset.src;//해당되는 이미지의 dataset.src를 src로 변경
+        } else {
+            return !1;
+        }
+
+    });
+}, options);
 
 
 
@@ -77,7 +101,7 @@ function contentsLoader(worksArray) {
         div.dataset.type = worksArray[i].type;
         div.innerHTML = `
         <div class="item__thumb">
-            <img src="imgs/thumbs/${worksArray[i].number}.${worksArray[i].thumb}" alt="${All[i].number}" class="item__thumb__img">
+            <img src="imgs/blank.png" data-src="imgs/thumbs/${worksArray[i].number}.${worksArray[i].thumb}" alt="${All[i].number}" class="item__thumb__img lazyload">
         </div>
         <div class="item__description">
             <div class="item__descriptrion__en">
@@ -87,6 +111,7 @@ function contentsLoader(worksArray) {
             <h3 class="ko">${worksArray[i].ko}</h3>
         </div>`
         container.appendChild(div);
+
     }
 }
 function filterType(arr, a) {
