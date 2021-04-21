@@ -5,58 +5,56 @@ import { All } from './allWorksList.js';
 const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
-let earlyBirds;
-let lazyItems;
-let ioIndex;
-let rect;
-//io가 컨텐츠로더보다 위에 있어야 작동..
+const itemBox = document.querySelectorAll('.item__box');
+
+
 const io = new IntersectionObserver((entries, observer) => {
-    for (let i = 0; i < entries.length; i++) {
-        ioIndex = entries[0].target.dataset.index * 1;
-    }
-    rect = entries[0].target.getBoundingClientRect();
-    console.log(window.innerHeight);
-    console.log(rect.top);
-    if (rect.top < window.innerHeight) {
-        const source = entries[0].target.querySelector('img').dataset.src;
-        entries[0].target.querySelector('img').setAttribute('src', source);
-
-
-        // if (earlyBirds === 12) {
-        //     for (let i = 0; i < 4; i++) {
-        //         const sameRow = itemBoxes[earlyBirds + ioIndex + i];
-        //         sameRow.querySelector('img').setAttribute('src', samerow.querySelector('img').dataset.src);
-
-        //     }
-
-    }
+    console.log(entries);
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            console.log('intersecting');
+            console.log(entry.target);
+            let lazyImage = entry.target.querySelector('img');
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove("lazy");
+            lazyImage.style.visibility = 'visible';
+            io.unobserve(lazyImage);
+        }
+    })
 });
+let dataIndex = 0;
+itemBox.forEach((item) => {
+    io.observe(item);
+    item.dataset.index = dataIndex;
+    dataIndex++;
+});
+
 
 // Main Load
 //window.addEventListener('DOMContentLoaded', () => { if (container) { contentsLoader(All) } });
-if (container) {
-    contentsLoader(All);
-    const itemBoxes = document.querySelectorAll('.item__box');
-    if (window.innerWidth > 768) {
-        earlyBirds = 12;
-        imgLoader(earlyBirds, itemBoxes);
-    } else { earlyBirds = 6; imgLoader(earlyBirds, itemBoxes); }
-};
+// if (container) {
+//     contentsLoader(All);
+//     const itemBoxes = document.querySelectorAll('.item__box');
+//     if (window.innerWidth > 768) {
+//         earlyBirds = 12;
+//         imgLoader(earlyBirds, itemBoxes);
+//     } else { earlyBirds = 6; imgLoader(earlyBirds, itemBoxes); }
+// };
 
 //Type Load
-navbarTypes.addEventListener('click', (e) => {
-    const type = e.target.dataset.type;
-    if (type) {
-        if (type === 'All') {
-            document.location.href = '/'
-        } else {
-            const currentType = document.querySelector('.selected');
-            unselecter(currentType);
-            typeColorChanger(type);
-            contentsLoader(filterType(All, type));
-        }
-    }
-})
+// navbarTypes.addEventListener('click', (e) => {
+//     const type = e.target.dataset.type;
+//     if (type) {
+//         if (type === 'All') {
+//             document.location.href = '/'
+//         } else {
+//             const currentType = document.querySelector('.selected');
+//             unselecter(currentType);
+//             typeColorChanger(type);
+//             contentsLoader(filterType(All, type));
+//         }
+//     }
+// })
 
 //refresh
 const home = document.querySelector('.navbar__title');
@@ -140,11 +138,11 @@ function imgLoader(num, itemBox) {
     lazyItems = document.querySelectorAll('.lazy');
 }
 
-window.addEventListener('scroll', () => {
-    lazyItems.forEach(el => {
-        io.observe(el);
-    });
-})
+// window.addEventListener('scroll', () => {
+//     lazyItems.forEach(el => {
+//         io.observe(el);
+//     });
+// })
 
 
 
@@ -194,14 +192,4 @@ function closeBurger() {
 //             lazyImageObserver.unobserve(lazyImage);
 //         }
 //     });
-// const io = new IntersectionObserver((entries, observer) => {
-//     console.log(entries);
-//     entries.forEach((entry) => {
-//         if (entry.isIntersecting) {
-//             let lazyImage = entry.target;
-//             lazyImage.src = lazyImage.dataset.src;
-//             lazyImage.classList.remove("lazy");
-//             lazyImageObserver.unobserve(lazyImage);
-//         }
-//     })
-// };
+

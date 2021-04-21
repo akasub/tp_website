@@ -176,9 +176,12 @@ p.ko.etc{
 .item__thumb__img{
     /* border-bottom: solid 1px black; */
     /* min-height: 30vw; */
-    visibility: visible;
+    /* visibility: visible; */
+    visibility: hidden;
     object-fit: cover;
-    transition: 0.5s;
+    transition-property: all;
+    transition: opacity ease-in 2000ms;
+    
 }
 .item__thumb__img:hover{
    opacity: 50%;
@@ -197,6 +200,9 @@ p.ko.etc{
 }
 .hidden{
     visibility: hidden;
+}
+.none{
+    display: none;
 }
 
 
