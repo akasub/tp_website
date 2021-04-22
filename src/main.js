@@ -78,7 +78,7 @@ function sender() {
 const options = {//얼마나 노출되었을 때 발동할지 옵션설정
     threshold: 0
 }
-var io = new IntersectionObserver(function (entries) {//io라는 이름의 IntersectionObserver를 생성
+const io = new IntersectionObserver(function (entries) {//io라는 이름의 IntersectionObserver를 생성
     entries.forEach(function (entry) {
         if (entry.isIntersecting) {//만약 이미지를 관찰하고 있다면 
             io.unobserve(entry.target);//이미지 관찰종료

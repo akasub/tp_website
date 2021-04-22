@@ -2,6 +2,24 @@
 
 import { All } from './allWorksList.js';
 
+const options = {//얼마나 노출되었을 때 발동할지 옵션설정
+    threshold: 0
+}
+const io = new IntersectionObserver(function (entries) {//io라는 이름의 IntersectionObserver를 생성
+    entries.forEach(function (entry) {
+        if (entry.isIntersecting) {//만약 이미지를 관찰하고 있다면 
+            io.unobserve(entry.target);//이미지 관찰종료
+            entry.target.querySelectorAll('img').forEach(function (el) {
+                el.src = el.dataset.src;
+            })
+            //entry.target.src = entry.target.dataset.src;//해당되는 이미지의 dataset.src를 src로 변경
+        } else {
+            return !1;
+        }
+
+    });
+}, options);
+
 const project = document.querySelector('#project');
 const tail = document.querySelector('#tail');
 const tailLeft = document.querySelector('.tail__left');
@@ -19,6 +37,9 @@ home.addEventListener('click', () => document.location.href = '/');
 if (project) {
     projectLoader(index);
     projectImgLoader(index);
+    document.querySelectorAll('.lazyload').forEach(function (el) {//lazyload란 클래스를 가진 태그를 관찰
+        io.observe(el);
+    });
 }
 
 if (index === 0) {
@@ -88,7 +109,9 @@ function projectImgLoader(num) {
         const imgWidth = imgs[i].substr(3, 3);
 
         imgDiv.setAttribute('class', `${imgWidth} project__image`);
-        img.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i]}`)
+        imgDiv.classList.add('lazyload'); //여기서 setAttribute 하면 위에서 정한 클래스가 지워짐...
+        img.dataset.src = `imgs/projects/${projectIndex}/${imgs[i]}`
+        img.setAttribute('src', `imgs/blank.png`)
         imgDiv.appendChild(img);
         imgContainer.appendChild(imgDiv);
 
@@ -99,13 +122,15 @@ function projectImgLoader(num) {
                 break;
             case 'mw2':
                 const secondMw = document.createElement('img');
-                secondMw.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i + 1]}`)
+                secondMw.dataset.src = `imgs/projects/${projectIndex}/${imgs[i + 1]}`;
+                secondMw.setAttribute('src', '/imgs/blank.png')
                 imgDiv.appendChild(secondMw);
                 i++;
                 break;
             case 'tw2':
                 const secondTw = document.createElement('img');
-                secondTw.setAttribute('src', `imgs/projects/${projectIndex}/${imgs[i + 1]}`)
+                secondTw.dataset.src = `imgs/projects/${projectIndex}/${imgs[i + 1]}`;
+                secondTw.setAttribute('src', '/imgs/blank.png')
                 imgDiv.appendChild(secondTw);
                 i++;
                 break;
