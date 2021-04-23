@@ -70,28 +70,29 @@ tail.addEventListener('click', (e) => {
 
 
 
-function projectLoader(index) {
+function projectLoader(num) {
     // const strToNum = parseInt(num);
     // const index = All.findIndex(el => el.number === strToNum);
+    console.log(num);
     project.innerHTML = `
     <div class="project__text">
     <div class="project__text__title">
-    <h4 class="type-under-title">${All[index].type.join(", ")}</h4>
-        <h1 class="en">${All[index].en}</h1>
-        <h1 class="ko">${All[index].ko}</h1>
+    <h4 class="type-under-title">${All[num].type.join(", ")}</h4>
+        <h1 class="en">${All[num].en}</h1>
+        <h1 class="ko">${All[num].ko}</h1>
     
     </div>
 
     <div class="project__text__description">
         <div class="text__description__en">
-            <p class="en description">${All[index].enTxt}
+            <p class="en description">${All[num].enTxt}
             </p>
 
-            <p class="en etc">${All[index].enEtc}</p>
+            <p class="en etc">${All[num].enEtc}</p>
         </div>
         <div class="text__description__ko">
-            <p class="ko description">${All[index].koTxt}</p>
-            <p class="ko etc">${All[index].koEtc}</p>
+            <p class="ko description">${All[num].koTxt}</p>
+            <p class="ko etc">${All[num].koEtc}</p>
         </div>
     </div>
 </div>
