@@ -1,6 +1,7 @@
 'use strict';
 
 import { All } from './allWorksList.js';
+console.log(All);
 
 const options = {//얼마나 노출되었을 때 발동할지 옵션설정
     threshold: 0
