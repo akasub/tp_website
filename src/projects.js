@@ -1,7 +1,6 @@
 'use strict';
 
 import { All } from './allWorksList.js';
-console.log(All);
 
 const options = {//얼마나 노출되었을 때 발동할지 옵션설정
     threshold: 0
@@ -36,6 +35,7 @@ const home = document.querySelector('.navbar__title');
 home.addEventListener('click', () => document.location.href = '/');
 
 if (project) {
+    console.log(project);
     projectLoader(index);
     projectImgLoader(index);
     document.querySelectorAll('.lazyload').forEach(function (el) {//lazyload란 클래스를 가진 태그를 관찰
@@ -70,7 +70,7 @@ tail.addEventListener('click', (e) => {
 
 
 
-function projectLoader(num) {
+function projectLoader(index) {
     // const strToNum = parseInt(num);
     // const index = All.findIndex(el => el.number === strToNum);
     project.innerHTML = `
