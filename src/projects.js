@@ -35,6 +35,9 @@ const home = document.querySelector('.navbar__title');
 home.addEventListener('click', () => document.location.href = '/');
 
 if (project) {
+    console.log(`window.location.pathname = ${window.location.pathname}`);
+    console.log(`projectIndex = ${projectIndex}`);
+    console.log(`strToNum = ${strToNum}`);
     console.log(`index = ${index}`);
     console.log(project);
     projectLoader(index);
