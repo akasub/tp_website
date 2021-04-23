@@ -415,7 +415,19 @@ export const All = [
         imgs: ['01_tw1.jpg', '02_tw1.jpg', '03_tw1.jpg', '04_tw2.jpg', '05_tw2.jpg', '06_tw1.jpg', '07_tw1.jpg', '08_tw2.jpg', '09_tw2.jpg', '10_tw1.gif',],
         video: { position: 'none', },
     },
-
+    {
+        number: 160000,
+        thumb: 'gif',
+        type: ['Graphics'],
+        en: 'Posters for Cultural Space Soomdo',
+        ko: '문화공간 숨도 포스터',
+        enTxt: 'Posters for various events and lectures in the Cultural Space Soomdo.',
+        enEtc: 'Scope: Poster</br>Client: Cultural Space Soomdo</br>Year: 2014-2017',
+        koTxt: '문화공간 숨도의 다양한 행사와 강연 포스터를 제작했습니다.',
+        koEtc: '작업범위: 포스터</br>의뢰: 문화공간 숨도</br>제작시기: 2014-2017년',
+        imgs: ['01_mw1.jpg', '02_mw1.jpg', '03_mw1.jpg', '04_mw1.jpg', '05_mw1.jpg',],
+        video: { position: 'none', },
+    },
     // {
     //     number: 000000,
     //     thumb: 'jpg',
