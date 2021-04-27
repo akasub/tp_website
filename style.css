@@ -6,6 +6,10 @@
     /* word-break: normal; */
     word-break: keep-all;
 }
+body{
+    max-width: 1400px;
+    margin: auto;
+}
 ul,li{
     list-style-type: none;
     padding: 0;
@@ -100,6 +104,7 @@ p.ko.etc{
 #navbar{
     position: fixed;
     width: 100%;
+    max-width: 1400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -211,6 +216,30 @@ p.ko.etc{
 .etc{
     margin-bottom: 10px;
 }
+#about{
+    padding: 0 20px;
+    padding-top: 100px;
+    width: calc(100vw-40)px;
+    padding-bottom: 200px; 
+}
+p.description.en.about{
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21pt;
+}
+p.description.ko.about{
+    font-family: 'Gothic A1', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24pt;
+}
+.bold.en{
+    font-weight: 600;
+}
+.bold.ko{
+    font-weight: 600;
+}
 
 
 .project__image{
@@ -254,10 +283,12 @@ p.ko.etc{
     }
     .toggle-btn{
         display: block;
+        /* display: none; */
     }
 
     #container{
-        padding: 60px 10px;
+        /* padding: 60px 10px; */
+        padding: 120px 10px;
         width: calc(100vw-56)px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -284,4 +315,17 @@ p.ko.etc{
     .mw2{
         display: block;
     }
+
+    p.description.about{
+        margin-bottom: 60px;
+    }
+}
+
+
+
+
+
+
+.display-none{
+    display: none;
 }

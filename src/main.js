@@ -2,9 +2,12 @@
 
 import { All } from './allWorksList.js';
 
+
 const container = document.querySelector('#container');
 const navbarTypes = document.querySelector('.navbar__types');
 const navbarMenus = document.querySelector('.navbar__menus');
+
+// const about = document.querySelector('#about')
 
 // Main Load
 window.addEventListener('DOMContentLoaded', () => {

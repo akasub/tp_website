@@ -47,6 +47,7 @@ if (project) {
     });
 }
 
+
 if (index === 0) {
     tailLeft.style.visibility = 'hidden';
 } else if (index === All.length - 1) {
